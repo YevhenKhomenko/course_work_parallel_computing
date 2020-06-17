@@ -28,6 +28,8 @@ public class Main{
 		InvertedIndexMap map = new InvertedIndexMap(tokenFile, files);
 		map.startThreads(numOfThreads);
 		map.generateOutputFile();
+		double execTime = map.getExecutionTime();
+		System.out.println("Execution time (seconds) : "  + execTime);
 
 	}
 

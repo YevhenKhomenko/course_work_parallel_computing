@@ -7,6 +7,7 @@ public class InvertedIndexMap{
 	 Map<String, Map<String, Integer>> wordDocMap;
 	 File tokenFile;
 	 List<File> files;
+	 private double execTime;
 
 	public InvertedIndexMap(File tokenFile, List<File> files){
 		this.tokenFile = tokenFile;
@@ -23,6 +24,7 @@ public class InvertedIndexMap{
 	}
 
 	public  void startThreads(int numOfThreads){
+		long startTime = System.currentTimeMillis();
 		Thread[] threads = new Thread[numOfThreads];
 		for(int i = 0; i < numOfThreads; i++){
 			threads[i] = new InvertedIndexThread(wordDocMap, files, 
@@ -37,12 +39,18 @@ public class InvertedIndexMap{
                 e.printStackTrace();
             }
         }
+        long endTime = System.currentTimeMillis();
+		execTime = (double) (endTime - startTime) / 1000;
         filterMap();
 
 	}
 
 	public Map<String, Map<String, Integer>> getInvertedIndex(){
 		return wordDocMap;
+	}
+
+	public double getExecutionTime(){
+		return execTime;
 	}
 
 
@@ -59,15 +67,15 @@ public class InvertedIndexMap{
             File output = new File("/Users/ievgenkhonenko/Desktop/vocabluary.txt");
             FileWriter outputWriter = new FileWriter("/Users/ievgenkhonenko/Desktop/vocabluary.txt");
 
-            for(Map.Entry<String, Map<String,Integer>> wordDoc : wordDocMap.entrySet()) {
+            for(Map.Entry<String, Map<String,Integer>> wordDoc : wordDocMap.entrySet()){
     			String word = wordDoc.getKey();
     			outputWriter.write(word + ":\n");
     			Map<String, Integer> docWordCount = wordDoc.getValue();
 
    		    	for(Map.Entry<String, Integer> docFrequency : docWordCount.entrySet()) {
-        				String document = docFrequency.getKey();
-       			    	Integer wordCount = docFrequency.getValue();
-                    	outputWriter.write("\t\t" + document +"\t" +"found " + wordCount + " times" + "\n");
+        			String document = docFrequency.getKey();
+       		    	Integer wordCount = docFrequency.getValue();
+                   	outputWriter.write("\t\t" + document +"\t" +"found " + wordCount + " times" + "\n");
     				}				
 				}
             outputWriter.close();
