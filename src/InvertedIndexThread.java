@@ -29,19 +29,21 @@ public class InvertedIndexThread extends Thread{
                 String [] words = fileScanner
                         .nextLine()
                         .toLowerCase()
-                        .split("[( ,.;:/<>\"?!)]+"); 
+                        .split("[\\p{Punct}\\s]+"); //.split("[( ,.;:/<>\"?!)]+");
                 
                 for (String word: words) {
-                    Map<String, Integer> docCountMap = wordDocMap.get(word);
-					if(docCountMap == null) {
-    					docCountMap = new TreeMap<>();
-   				    	wordDocMap.put(word, docCountMap);
-					}
-					Integer currentCount = docCountMap.get(file.getAbsolutePath());
-					if(currentCount == null) {
-    					currentCount = 0;
-					}
-					docCountMap.put(file.getAbsolutePath(), currentCount + 1);
+                                                //added
+                        Map<String, Integer> docCountMap = wordDocMap.get(word);
+					    if(docCountMap == null) {
+    					    docCountMap = new TreeMap<>();
+   				    	    wordDocMap.put(word, docCountMap);
+					    }
+					    Integer currentCount = docCountMap.get(file.getAbsolutePath());
+					    if(currentCount == null) {
+    					   currentCount = 0;
+					    }
+					    docCountMap.put(file.getAbsolutePath(), currentCount + 1);
+                    
                 }
             }
         } catch (FileNotFoundException e) {

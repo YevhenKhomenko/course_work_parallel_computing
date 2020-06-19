@@ -62,6 +62,8 @@ public class InvertedIndexMap{
 		wordDocMap = filteredWordDocMap;
 	}
 
+
+
 	public void generateOutputFile(){
         try {
             File output = new File("/Users/ievgenkhonenko/Desktop/vocabluary.txt");
