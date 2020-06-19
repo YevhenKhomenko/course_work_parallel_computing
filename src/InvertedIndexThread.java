@@ -29,7 +29,7 @@ public class InvertedIndexThread extends Thread{
                 String [] words = fileScanner
                         .nextLine()
                         .toLowerCase()
-                        .split("[\\p{Punct}\\s]+"); //.split("[( ,.;:/<>\"?!)]+");
+                        .split("[\\p{Punct}\\s]+"); 
                 
                 for (String word: words) {
                                                 //added

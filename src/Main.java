@@ -30,6 +30,8 @@ public class Main{
 		map.generateOutputFile();
 		double execTime = map.getExecutionTime();
 		System.out.println("Execution time (seconds) : "  + execTime);
+		System.out.println("Find word: ");
+		wordSearcher(map);
 
 	}
 
@@ -51,4 +53,19 @@ public class Main{
 		}
 
 	}
+
+	public static void wordSearcher(InvertedIndexMap map){
+		Map<String, Map<String, Integer>> curMap = map.getInvertedIndex();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        while (true) {
+            String word = null;
+            try {
+                word = reader.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println(curMap.get(word));
+        }
+    }
 }

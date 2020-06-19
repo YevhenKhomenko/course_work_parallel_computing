@@ -4,9 +4,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 public class InvertedIndexMap{
-	 Map<String, Map<String, Integer>> wordDocMap;
-	 File tokenFile;
-	 List<File> files;
+	 private Map<String, Map<String, Integer>> wordDocMap;
+	 private File tokenFile;
+	 private List<File> files;
 	 private double execTime;
 
 	public InvertedIndexMap(File tokenFile, List<File> files){
@@ -87,5 +87,7 @@ public class InvertedIndexMap{
         }
 
     }
+
+
 
 }
